@@ -220,7 +220,16 @@ Check again the response for the autoactivation:
 This will return a triple containing this information:
 
 ```sh
-(200, 'OK', {u'code': u'AutoActivated.CachedCredential', u'resource': u'/endpoint/surfsara%23dCache_gridftp/autoactivate', u'DATA_TYPE': u'activation_result', u'expires_in': 42553, u'length': 0, u'endpoint': u'surfsara#dCache_gridftp', u'request_id': u'vdG4gZnI2', u'expire_time': u'2016-09-21 18:16:42+00:00', u'message': u'Endpoint activated successfully using cached credential', u'DATA': [], u'oauth_server': None, u'subject': u'/DC=org/DC=terena/DC=tcs/C=NL/O=SURFsara B.V./CN=Christine Staiger christine.staiger@surfsara.nl/CN=proxy/CN=proxy/CN=proxy'})
+(200, 'OK', 
+{u'code': u'AutoActivated.CachedCredential', 
+u'resource': u'/endpoint/surfsara%23dCache_gridftp/autoactivate', 
+u'DATA_TYPE': u'activation_result', u'expires_in': 42553, u'length': 0, 
+u'endpoint': u'surfsara#dCache_gridftp', u'request_id': u'vdG4gZnI2', 
+u'expire_time': u'2016-09-21 18:16:42+00:00', 
+u'message': u'Endpoint activated successfully using cached credential', 
+u'DATA': [], u'oauth_server': None, 
+u'subject': 
+u'/DC=org/DC=terena/DC=tcs/C=NL/O=<organisation>/CN=<name and e-mail>/CN=proxy/CN=proxy/CN=proxy'})
 ```
 To be sure that the endpoint is activated you should always check the *code*.
 Try to activate an endpoint you do not have access to and compare the output with the output above.
