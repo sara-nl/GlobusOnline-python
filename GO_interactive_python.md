@@ -45,7 +45,7 @@ $ ssh <globususer>@cli.globusonline.org endpoint-search --scope my-endpoints
 
 Open python in the interactive mode with
 ```sh
-$ python -i -m globusonline.transfer.api_client.main cstaiger -p
+$ python -i -m globusonline.transfer.api_client.main <user> -p
 ```
 You will be asked for your globus online password, the password you set when creating the globus account, not the password of your grid certificate.
 
