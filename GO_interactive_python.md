@@ -243,6 +243,8 @@ Alternatively, you can also use the web interface of globus and activate the gri
 
 **Exercise** Activate *surfsara#archive*.
 
+**Exercise** Activate a personal endpoint with the *autoactivate* function and compare the output with the previous one.
+
 **Exercise** Inspect the help of the function *endpoint_autoactivate* and activate an endpoint only if the existing activation expires in 1h or less.
 
 **Exercise** Activate your personal endpoint with ths function. 
