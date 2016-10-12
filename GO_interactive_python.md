@@ -211,13 +211,20 @@ u'oauth_server': None,
 u'subject': u'/DC=org/DC=terena/DC=tcs/C=NL/O=<organisation>/CN=<name and e-mail>/CN=proxy/CN=proxy/CN=proxy'})
 ```
 
-Check again the response for the autoactivation:
+You can check the status of your endpoints in the web interface of Globus Online (https://www.globus.org/app/endpoints). In python you can get information on your endpoints witrh the function and check whether an endoint is active:
 
+```
+>>> code, reason, data = api.endpoint("<your endpoint>")
+>>> api.endpoint("surfsara#archive")[2]["activated"]
+True
+```
+
+A more convenient way to activate an endpoint is:
 ```sh
 >>> api.endpoint_autoactivate("surfsara#dCache_gridftp")
 ```
-
-This will return a triple containing this information:
+However, this function only works after you have activated endpoints previously and passed the requirements properly.
+The command will return a triple containing this information:
 
 ```sh
 (200, 'OK', 
@@ -238,6 +245,12 @@ Try to activate an endpoint you do not have access to and compare the output wit
 >>> api.endpoint_activate("cineca#PICO", reqs)
 >>> api.endpoint_autoactivate("cineca#PICO")
 ```
+The response is unfortunately not very conclusive. The autoactivation fails since we cannot login to this machine. However, the endpoint is activated:
+```
+>>> api.endpoint("cineca#PICO")[2]["activated"]
+True
+```
+> Always check with the autoactivation function that you have access to the machines!
 
 Alternatively, you can also use the web interface of globus and activate the grid and archive endpoints with your proxy and then proceed with transferring data by means of the python API.
 
@@ -308,6 +321,7 @@ and add it to the transfer object (in the python shell):
 ```sh
 >>> t.add_item("/home/<user>/TestData/", "/pnfs/grid.sara.nl/data/<VO>/<user>/TestData/", recursive=True)
 ```
+We are transferring a folder that is why we have to set the option *recursive* to true. Do not forget the trailing slahses when transferring folders.
 You can add as many items to the transfer as you wish. Note that *recursive* is by default set to *false*. You do not need the recursive option when transferring single files.
 
 Start the transfer task:
@@ -319,10 +333,12 @@ Start the transfer task:
 **Exercise** Inspect the code and the data. Create some invalid transfers (wrong path, unactivated endpoints , ...) and reinspect the data.
 
 ## Monitoring
-With the *task_id* you can ask for the status of the transfer
+You can monitor transfers in general via the web interface (https://www.globus.org/app/activity).
+With the *task_id* you can also ask for the status of the transfer via the python API:
 
 ```sh
 >>> code, reason, data = api.task(task_id)
+>>> data['status']
 ```
 
 Inspect the *data*. You can also monitor this transfer in the webinterface of globus.
